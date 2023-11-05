@@ -11,23 +11,23 @@ class App extends Component {
     bad: 0,
   };
 
-  onLeaveFeedback = key => {
-    this.setState(prevSate => ({
-      [key]: prevSate[key] + 1,
+  handleLeaveFeedback = key => {
+    this.setState(prevState => ({
+      [key]: prevState[key] + 1,
     }));
   };
 
-  countTotalFeedBack = () => {
+  countTotalFeedback = () => {
     return Object.values(this.state).reduce((acc, value) => acc + value, 0);
   };
 
   countPositiveFeedbackPercentage = () => {
-    return (this.state.good / this.countTotalFeedBack()) * 100;
+    return (this.state.good / this.countTotalFeedback()) * 100;
   };
 
   render() {
     const { good, neutral, bad } = this.state;
-    const total = this.countTotalFeedBack();
+    const total = this.countTotalFeedback();
     const positivePercentage =
       this.countPositiveFeedbackPercentage().toFixed(1);
     return (
@@ -35,7 +35,7 @@ class App extends Component {
         <Section title="Please leave feedback">
           <FeedbackOptions
             options={Object.keys(this.state)}
-            onLeaveFeedback={this.onLeaveFeedback}
+            onLeaveFeedback={this.handleLeaveFeedback}
           />
         </Section>
 
